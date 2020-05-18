@@ -2,6 +2,8 @@ require "httparty"
 require "nokogiri"
 require "pry"
 require"require_all"
+require "rubocop"
+require "rubocop - performance"
 
 require_all "./lib/"
 
