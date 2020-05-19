@@ -1,9 +1,6 @@
 # This is responsibilie for scraping my web page(s)
 # This file will use nokogiri, i.e. scrape.
 # This file wil never use puts.
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
 
 # Doc = Nokogiri::HTML(HTTParty.get(URL).body) 
 
@@ -22,16 +19,15 @@ class Scraper
   attr_accessor :doc
 
   def initialize
-    @doc = Nokogiri::HTML(HTTParty.get("#{BASE_URL}").body) 
+    @doc = Nokogiri::HTML(HTTParty.get(BASE_URL).body) 
   end
 
 
   def scape_rank
 
-  doc.css(<div class="item-number">01</div>)
+    doc.css(<div class="item-number">01</div>)
 
     puts doc.css(<div class="item-number">01</div>).text
-
   end
 
 
