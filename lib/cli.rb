@@ -4,11 +4,11 @@
 # This will have invoke Scraper
 
 class  Cli
-  attr_accessor
-  binding.pry
+
+  def call
+    welcome
+    start
   end
-
-
   # Use #welcome
   # Use #start
 
@@ -19,6 +19,9 @@ class  Cli
 
   def start
     puts "To learn more about The Beatles top 25 songs, enter a number between 1 - 25"
+
+    scraper = Scraper.new
+    scraper.scape_rank
       # receives input from user
 
       # displays song rank, song title, & paragraphs about that particular song.
@@ -33,18 +36,10 @@ class  Cli
       # Once user inputs 'q', invoke the #goodbye method.
 
   end
-
-
-
 # Scraper Method for puts out which Beatles song they choose based on their integer input
 # will need input chomp situation
 
-
-def goodbye
-  puts "Thank you for checking out the top 25 Beatles songs."
-end
-
-
-
-
+  def goodbye
+    puts "Thank you for checking out the top 25 Beatles songs."
+  end
 end

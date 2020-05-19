@@ -6,7 +6,7 @@
 # doc = Nokogiri::HTML(HTTParty.get("https://www.liveabout.com/top-beatles-songs-4058717""))
 
 
-class TopBeatlesSongs
+class BeatlesSong
 
   attr_reader :rank, :name, :release_year, :peak_position, :image
 
