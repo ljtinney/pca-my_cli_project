@@ -4,40 +4,56 @@
 # This will have invoke Scraper
 
 class  Cli
-
   def call
-    welcome
+    hello
     start
   end
-  # Use #welcome
-  # Use #start
 
-
-  def welcome
-    puts "Welcome!"
+  def hello
+    puts "Hello! Welcome!"
   end
 
   def start
-    puts "To learn more about The Beatles top 25 songs, enter a number between 1 - 25"
-
+    puts "To learn more about The Beatles top 25 songs, " \
+         "enter a number between 1 - 25"
     scraper = Scraper.new
-    scraper.scape_rank
-      # receives input from user
-
-      # displays song rank, song title, & paragraphs about that particular song.
-      # Bonus, maybe display the image too, depending on JavaScript stuff
-
-      # Then puts, "to continue to learn about more top 25 Beatles songs, please enter another number between 1 - 25, if you're finshed please type the letter 'q' to quit"
-
-      # Gets input from user.
-
-      # Loop similar to the Music CLI lab, whre it continues on until the condition of user input of 'q' is met.
-
-      # Once user inputs 'q', invoke the #goodbye method.
-
+    scraper.scrape_rank
   end
+
+  def game_on
+  # user_input = gets.strip.downcase
+  #     if input == "exit" || "bye" || "goodbye" || "quit"
+  #       goodbye
+  #       exit
+  #     elsif user_input.to_i <= 0
+  #       puts "Yeah... that is a number between 1 - 25,... please choose a NUMBER between 1 - 25"
+  #     elsif user_input.in 1..25
+  #       input_to_index
+  #       # recall_song method, yet to be written.
+  #     end
+  #   end
+  end
+
+
 # Scraper Method for puts out which Beatles song they choose based on their integer input
 # will need input chomp situation
+
+# if index.between?(0,8)
+
+
+
+#   def turn
+#     puts "Please choose a number between 1 - 25"
+#     user_input = gets.chomp
+#     index = input_to_index(user_input)
+#     if valid_move?(index)
+#       player_token = current_player
+#       move(index, player_token)
+#       display_board
+#     else
+#       turn
+#     end
+#   end
 
   def goodbye
     puts "Thank you for checking out the top 25 Beatles songs."

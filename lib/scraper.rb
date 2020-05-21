@@ -1,18 +1,3 @@
-# This is responsibilie for scraping my web page(s)
-# This file will use nokogiri, i.e. scrape.
-# This file wil never use puts.
-
-# Doc = Nokogiri::HTML(HTTParty.get(URL).body) 
-
-# doc = Nokogiri::HTML(HTTParty.get(https://www.liveabout.com/top-beatles-songs-4058717).body) 
-
-# unparsed_page = HTTParty.get(url)     @parsed_page = Nokogiri::HTML(unparsed_page) Nokogiri::HTML(HTTParty.get(url))
-
-# html = open("https://www.liveabout.com/top-beatles-songs-4058717")
-# doc = Nokogiri::HTML(html)
-
-# doc = Nokogiri::HTML(open("https://www.liveabout.com/top-beatles-songs-4058717"))
-
 class Scraper
   BASE_URL = "https://www.liveabout.com/top-beatles-songs-4058717"
 
@@ -22,33 +7,30 @@ class Scraper
     @doc = Nokogiri::HTML(HTTParty.get(BASE_URL).body)
   end
 
+  def scrape_rank
+    all_songs = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css(".mntl-sc-block-heading__text").map {|section| section.text.split("\"").pop(2) }
 
-  def scape_rank
     binding.pry
-    doc.css("div.item-number")
-    # comp mntl-sc-list-item list-sc-item mntl-block
 
-   # puts doc.css(<div class="item-number">01</div>).text
+    all_songs[0]
+    all_songs[user_index]
+
   end
 
-
   def scrape_song_name
+    all_songs = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css(".mntl-sc-block-heading__text").map {|section| section.text.split("\"").pop(2) }
 
-  blurbs = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block")
-  blurbs.css(".mntl-sc-block-heading__text").map {|section| section.text }
-  # ^gives you the list of songs w/ year.... for example looks like... " \"She Loves You\" (1963) ",
+
+
 
   end
 
 
   def scrape_release_year
-
-    blurbs = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block")
-    blurbs.css(".mntl-sc-block-heading__text").map {|section| section.text }
-  # ^gives you array list of songs w/ year.... for example looks like... " \"She Loves You\" (1963)"
+    all_songs = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css(".mntl-sc-block-heading__text").map {|section| section.text }
 
 
-  doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block.mntl-sc-block-heading__text")
+
   end
 
 
