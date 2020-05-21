@@ -40,7 +40,7 @@ class  Cli
 
 # if index.between?(0,8)
 
-
+# input = gets.strip Input.to_i unless input == “exit” 
 
 #   def turn
 #     puts "Please choose a number between 1 - 25"

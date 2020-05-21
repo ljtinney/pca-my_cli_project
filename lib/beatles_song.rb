@@ -8,16 +8,14 @@
 
 class BeatlesSong
 
-  attr_reader :rank, :name, :release_year, :peak_position, :image
+  attr_reader :rank, :name, :release_year
 
   @@all = []
 
-  def initialize(rank = nil, name = nil, release_year = nil, peak_position = nil, image = nil)
+  def initialize(rank = nil, name = nil, release_year = nil)
     @rank = rank
     @name = name
     @release_year = release_year
-    @peak_position = peak_position
-    @image = image
     @@all << self
   end
 
