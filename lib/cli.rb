@@ -4,10 +4,16 @@
 # This will have invoke Scraper
 
 class  Cli
+  attr_reader :scraper
   def call
     hello
     start
-    grab_input
+    make_selection
+    game_on
+
+        # gets the user input (an id)
+    # finding the particular song
+    # doing your second scrape to get the description
   end
 
   def hello
@@ -16,36 +22,40 @@ class  Cli
 
   def start
     puts "Here are the top 25 Beatles songs."
-    scraper = Scraper.new
+    @scraper = Scraper.new
     scraper.scrape_songs
     BeatlesSong.all.each do |song|
       puts "#{song.rank}. #{song.title} #{song.release_year}"
     end
-    # gets the user input (an id)
-    # finding the particular song
-    # doing your second scrape to get the description
   end
 
-  def grab_input
+  def make_selection
     puts "To learn more about The Beatles top 25 songs, " \
          "enter a number between 1 - 25"
-    input = gets.chomp
   end
 
-
-
   def game_on
-  # user_input = gets.strip.downcase
-  #     if input == "exit" || "bye" || "goodbye" || "quit"
-  #       goodbye
-  #       exit
-  #     elsif user_input.to_i <= 0
-  #       puts "Yeah... that is a number between 1 - 25,... please choose a NUMBER between 1 - 25"
-  #     elsif user_input.in 1..25
-  #       input_to_index
-  #       # recall_song method, yet to be written.
-  #     end
-  #   end
+    input = gets.strip.downcase
+    if input == "exit"
+      goodbye
+      exit
+    elsif input.to_i <= 0 || input.to_i > 25
+      puts "Yeah... that is not a number between 1 - 25,... " \
+           "please choose a NUMBER between 1 - 25"
+      game_on
+    else
+      song = song_chosen(input.to_i)
+      user_selection(song)
+    end
+  end
+
+  def song_chosen(input)
+    BeatlesSong.find_by_rank(input)
+  end
+
+  def user_selection(pick)
+    scraper.scrape_song(pick)
+    # puts "You chose #{pick.rank}. #{pick.title} #{pick.release_year}"
   end
 
 
