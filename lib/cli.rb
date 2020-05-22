@@ -55,6 +55,7 @@ class  Cli
 
   def user_selection(pick)
     scraper.scrape_song(pick)
+    puts pick.info
     # puts "You chose #{pick.rank}. #{pick.title} #{pick.release_year}"
   end
 

@@ -5,6 +5,7 @@
 
 class BeatlesSong
   attr_reader :rank, :title, :release_year
+  attr_accessor :info
 
   @@all = []
 

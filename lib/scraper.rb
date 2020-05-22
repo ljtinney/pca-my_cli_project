@@ -16,24 +16,9 @@ class Scraper
     end
   end
 
-
-
-
-  def more?
-# if they want more, it scrapes site for hyperlink & puts it out to them, which will take them to a Beatles video, or link to another site with more Beatles facts about individual Beatles...etc
-    doc.css("comp list-marker list-marker--numbers").map {|section| section.text }
-
-    doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css("item-number").map {|section| section.text }
-
-    doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block")
-
-    #  doc.css(<div class="item-number">01</div>).text
-
-     links = doc.css('div.heat a').map { |link| link['href'] }
-
-    #  <div id="list-sc-item_1-0-3" gets us to the song block.
-    #
-
+  def scrape_song(pick)
+    pick.info = doc.css("#list-sc-item_1-0-#{pick.rank - 1}")
+                   .css(".mntl-sc-block-html").text
   end
 
 
