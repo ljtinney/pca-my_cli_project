@@ -7,6 +7,7 @@ class  Cli
   def call
     hello
     start
+    grab_input
   end
 
   def hello
@@ -14,11 +15,24 @@ class  Cli
   end
 
   def start
+    puts "Here are the top 25 Beatles songs."
+    scraper = Scraper.new
+    scraper.scrape_songs
+    BeatlesSong.all.each do |song|
+      puts "#{song.rank}. #{song.title} #{song.release_year}"
+    end
+    # gets the user input (an id)
+    # finding the particular song
+    # doing your second scrape to get the description
+  end
+
+  def grab_input
     puts "To learn more about The Beatles top 25 songs, " \
          "enter a number between 1 - 25"
-    scraper = Scraper.new
-    scraper.scrape_rank
+    input = gets.chomp
   end
+
+
 
   def game_on
   # user_input = gets.strip.downcase

@@ -7,29 +7,32 @@ class Scraper
     @doc = Nokogiri::HTML(HTTParty.get(BASE_URL).body)
   end
 
-  def scrape_rank
-    ranked_songs = []
-    songs_list = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css(".mntl-sc-block-heading__text").map {|section| section.text.split("\"").pop(2) }
-
-    # songs_list[user_index] will give us the rank
-    binding.pry
-
+  def scrape_songs
+    doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block")
+       .css(".mntl-sc-block-heading__text").each do |section|
+      title, unparsed_year = section.text.split("\"").pop(2)
+      # year - clean up with string method (don't spend too much time on this)
+      BeatlesSong.new(title, unparsed_year)
+    end
   end
 
-  def scrape_song_name
-    songs_list = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css(".mntl-sc-block-heading__text").map {|section| section.text.split("\"").pop(2) }
 
-    # songs_list[user_index][0] will puts out the song title.
-  end
 
-  def scrape_release_year
-    songs_list = doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css(".mntl-sc-block-heading__text").map {|section| section.text }
-    # songs_list[user_index][1] will puts out the year the song was released.
-  end
 
   def more?
+# if they want more, it scrapes site for hyperlink & puts it out to them, which will take them to a Beatles video, or link to another site with more Beatles facts about individual Beatles...etc
+    doc.css("comp list-marker list-marker--numbers").map {|section| section.text }
 
-    doc.css("comp mntl-sc-block mntl-sc-block-html.a href")
+    doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block").css("item-number").map {|section| section.text }
+
+    doc.css(".comp.mntl-sc-list-item.list-sc-item.mntl-block")
+
+    #  doc.css(<div class="item-number">01</div>).text
+
+     links = doc.css('div.heat a').map { |link| link['href'] }
+
+    #  <div id="list-sc-item_1-0-3" gets us to the song block.
+    #
 
   end
 

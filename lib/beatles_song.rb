@@ -8,19 +8,23 @@
 
 class BeatlesSong
 
-  attr_reader :rank, :name, :release_year
+  attr_reader :rank, :title, :release_year
 
   @@all = []
 
-  def initialize(rank = nil, name = nil, release_year = nil)
-    @rank = rank
-    @name = name
+  def initialize(title, release_year)
+    @title = title
     @release_year = release_year
     @@all << self
+    @rank = @@all.size
   end
 
   def self.all
     @@all
+  end
+
+  def self.find_by_id(id)
+    @rank.find { |id| id.title == title}
   end
 
 
