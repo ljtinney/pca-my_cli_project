@@ -16,8 +16,13 @@ class Scraper
     end
   end
 
-  def scrape_song(pick)
+  def scrape_info(pick)
     pick.info = doc.css("#list-sc-item_1-0-#{pick.rank - 1}")
+                   .css(".mntl-sc-block-html").text
+  end
+
+  def scrape_special(pick)
+    pick.info = doc.css("#list-sc-item_1-0")
                    .css(".mntl-sc-block-html").text
   end
 

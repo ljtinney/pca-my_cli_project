@@ -10,10 +10,7 @@ class  Cli
     start
     make_selection
     game_on
-
-        # gets the user input (an id)
-    # finding the particular song
-    # doing your second scrape to get the description
+    goodbye
   end
 
   def hello
@@ -54,33 +51,22 @@ class  Cli
   end
 
   def user_selection(pick)
-    scraper.scrape_song(pick)
+    if pick.rank != 1
+      scraper.scrape_info(pick)
+      else
+      scraper.scrape_special(pick)
+    end
     puts pick.info
-    # puts "You chose #{pick.rank}. #{pick.title} #{pick.release_year}"
   end
-
-
-# Scraper Method for puts out which Beatles song they choose based on their integer input
-# will need input chomp situation
-
-# if index.between?(0,8)
-
-# input = gets.strip Input.to_i unless input == “exit” 
-
-#   def turn
-#     puts "Please choose a number between 1 - 25"
-#     user_input = gets.chomp
-#     index = input_to_index(user_input)
-#     if valid_move?(index)
-#       player_token = current_player
-#       move(index, player_token)
-#       display_board
-#     else
-#       turn
-#     end
-#   end
 
   def goodbye
     puts "Thank you for checking out the top 25 Beatles songs."
   end
+
 end
+
+
+
+# clone the project
+# run bundle
+# run bin/run.rb
