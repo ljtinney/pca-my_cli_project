@@ -1,33 +1,40 @@
-# This class is responsible for communication with the user.
-# This is where I will use 'puts'
-# This will never use nokogiri
-# This will have invoke Scraper
-
-class  Cli
+class Cli
   attr_reader :scraper
+
   def call
-    hello
+    greeting
+    scrape_it
     game_on
     goodbye
   end
 
-  def hello
-    puts "Hello! Welcome!"
+  def greeting
+    puts "
+    Hello! Welcome!
+    Here are the top 25 Beatles songs.
+    "
+  end
+
+  def scrape_it
+    @scraper = Scraper.new
+    scraper.scrape_songs
   end
 
   def start
-    puts "Here are the top 25 Beatles songs."
-    @scraper = Scraper.new
-    scraper.scrape_songs
+    puts "Here are the top 25 Beatles songs.
+    "
     BeatlesSong.all.each do |song|
       puts "#{song.rank}. #{song.title} #{song.release_year}"
     end
   end
 
   def make_selection
-    puts "To learn more about The Beatles top 25 songs, " \
-         "enter a number between 1 - 25"
+    puts "
+    To learn more about The Beatles top 25 songs, " \
+         "enter a number between 1 - 25
+         "
   end
+
 
   def game_on
     start
@@ -39,8 +46,7 @@ class  Cli
           goodbye
           exit
         elsif input.to_i <= 0 || input.to_i > 25
-          puts "Yeah... that is not a number between 1 - 25,... " \
-                "please choose a NUMBER between 1 - 25"
+          invalid_pick1
           game_on
         else
           song = song_chosen(input.to_i)
@@ -48,21 +54,6 @@ class  Cli
         end
       end
     end
-
-  # def game_on
-  #   input = gets.strip.downcase
-  #   if input == "exit"
-  #     goodbye
-  #     exit
-  #   elsif input.to_i <= 0 || input.to_i > 25
-  #     puts "Yeah... that is not a number between 1 - 25,... " \
-  #          "please choose a NUMBER between 1 - 25"
-  #     game_on
-  #   else
-  #     song = song_chosen(input.to_i)
-  #     user_selection(song)
-  #   end
-  # end
 
   def song_chosen(input)
     BeatlesSong.find_by_rank(input)
@@ -75,6 +66,14 @@ class  Cli
       scraper.scrape_special(pick)
     end
     puts pick.info
+  end
+
+  def invalid_pick1
+    sleep(1)
+    puts "Yeah... that is not a number between 1 - 25,... " \
+    "please choose a NUMBER between 1 - 25
+    "
+    sleep(1)
   end
 
   def goodbye
