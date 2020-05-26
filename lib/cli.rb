@@ -35,25 +35,24 @@ class Cli
          "
   end
 
-
   def game_on
     start
     while true
       make_selection
 
-        input = gets.strip.downcase
-        if input == "exit"
-          goodbye
-          exit
-        elsif input.to_i <= 0 || input.to_i > 25
-          invalid_pick1
-          game_on
-        else
-          song = song_chosen(input.to_i)
-          user_selection(song)
-        end
+      input = gets.strip.downcase
+      if input == "exit"
+        goodbye
+        exit
+      elsif input.to_i <= 0 || input.to_i > 25
+        invalid_pick
+        game_on
+      else
+        song = song_chosen(input.to_i)
+        user_selection(song)
       end
     end
+  end
 
   def song_chosen(input)
     BeatlesSong.find_by_rank(input)
@@ -68,7 +67,7 @@ class Cli
     puts pick.info
   end
 
-  def invalid_pick1
+  def invalid_pick
     sleep(1)
     puts "Yeah... that is not a number between 1 - 25,... " \
     "please choose a NUMBER between 1 - 25
@@ -77,9 +76,12 @@ class Cli
   end
 
   def goodbye
-    puts "Thank you for checking out the top 25 Beatles songs."
+    sleep(1)
+    puts "I appreciate you.
+    Thank you for checking out the top 25 Beatles songs.
+    "
+    sleep(1)
   end
-
 end
 
 # clone the project
