@@ -4,7 +4,7 @@ class Cli
   def call
     greeting
     scrape_it
-    game_on
+    take_input
     goodbye
   end
 
@@ -28,30 +28,21 @@ class Cli
     end
   end
 
-  def make_selection
+  def selection_notice
     puts "
     To learn more about The Beatles top 25 songs, " \
          "enter a number between 1 - 25
          "
   end
 
-  def game_on
-    start
-    while true
-      make_selection
+  def exit_program
+    goodbye
+    exit
+  end
 
-      input = gets.strip.downcase
-      if input == "exit"
-        goodbye
-        exit
-      elsif input.to_i <= 0 || input.to_i > 25
-        invalid_pick
-        game_on
-      else
-        song = song_chosen(input.to_i)
-        user_selection(song)
-      end
-    end
+  def try_again
+    invalid_pick
+    take_input
   end
 
   def song_chosen(input)
@@ -65,6 +56,25 @@ class Cli
       scraper.scrape_special(pick)
     end
     puts pick.info
+  end
+
+  def capture_pick(input)
+    song = song_chosen(input.to_i)
+    user_selection(song)
+  end
+
+  def take_input
+    start
+    loop do
+      selection_notice
+
+      input = gets.strip.downcase
+      if input == "exit" then exit_program
+      elsif input.to_i <= 0 || input.to_i > 25 then try_again
+      else
+        capture_pick(input)
+      end
+    end
   end
 
   def invalid_pick
@@ -83,7 +93,3 @@ class Cli
     sleep(1)
   end
 end
-
-# clone the project
-# run bundle
-# run bin/run.rb

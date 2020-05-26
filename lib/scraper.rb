@@ -25,6 +25,4 @@ class Scraper
     pick.info = doc.css("#list-sc-item_1-0")
                    .css(".mntl-sc-block-html").text
   end
-
-
 end
