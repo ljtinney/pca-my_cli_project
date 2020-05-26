@@ -4,7 +4,9 @@ CLI Scraping Gem Project 
 Ideas for CLI Scraping Gem Project
 https://www.liveabout.com/top-beatles-songs-4058717
 
-To initiate the CLI, type in `ruby bin/run.rb`.
+## Overview
+
+  The app pulls data from https://www.liveabout.com/top-beatles-songs-4058717.
 
 Welcomes the user with a welcome message.
 
@@ -17,3 +19,11 @@ Once the user enters a number from 1 to 25, it will return the corresponding Bea
 The user can also return to the original list to select a different song or enter `exit` to quit the CLI Program.
 
 Once a user is finished, they can exit the CLI Program and it will output a goodbye message.
+
+## How to run the program
+
+To initiate the CLI, type in `.bin/run.rb`.
+
+To learn more about a song, select the song according to its ranking (number between 1 - 25).
+
+When finished, simply type `exit` to quit the CLI Program.
